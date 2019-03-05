@@ -18,13 +18,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BGl-pu-3vO">
                             <size key="itemSize" width="200" height="200"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="90"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FlickrCell" id="YxO-HF-cb3" customClass="FlickrPhotoCell" customModule="FlickrSearch" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
+                                <rect key="frame" x="87.5" y="90" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -33,19 +33,45 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oyL-lp-eLy">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         </imageView>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fZ7-eO-eKI">
+                                            <rect key="frame" x="81.5" y="81.5" width="37" height="37"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                 </view>
                                 <constraints>
+                                    <constraint firstItem="fZ7-eO-eKI" firstAttribute="centerY" secondItem="YxO-HF-cb3" secondAttribute="centerY" id="2cr-ye-O9i"/>
                                     <constraint firstItem="oyL-lp-eLy" firstAttribute="leading" secondItem="YxO-HF-cb3" secondAttribute="leading" id="48c-gc-5ix"/>
+                                    <constraint firstItem="fZ7-eO-eKI" firstAttribute="centerX" secondItem="YxO-HF-cb3" secondAttribute="centerX" id="PTN-l6-VKe"/>
                                     <constraint firstAttribute="trailing" secondItem="oyL-lp-eLy" secondAttribute="trailing" id="SxC-DU-p9j"/>
                                     <constraint firstItem="oyL-lp-eLy" firstAttribute="top" secondItem="YxO-HF-cb3" secondAttribute="top" id="ZiS-eb-VKV"/>
                                     <constraint firstAttribute="bottom" secondItem="oyL-lp-eLy" secondAttribute="bottom" id="aJR-m6-fdB"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="fZ7-eO-eKI" id="Dg4-aa-qeG"/>
                                     <outlet property="imageView" destination="oyL-lp-eLy" id="aqS-i9-0uz"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="FlickrPhotoHeaderView" id="RO2-WX-x4s" customClass="FlickrPhotoHeaderView" customModule="FlickrSearch" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adb-Hb-DXk">
+                                    <rect key="frame" x="150" y="26" width="75.5" height="38.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="adb-Hb-DXk" firstAttribute="centerY" secondItem="RO2-WX-x4s" secondAttribute="centerY" id="9y9-lP-Vob"/>
+                                <constraint firstItem="adb-Hb-DXk" firstAttribute="centerX" secondItem="RO2-WX-x4s" secondAttribute="centerX" id="CDy-3H-R5i"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="label" destination="adb-Hb-DXk" id="gpN-Fl-UOE"/>
+                            </connections>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="uXG-oW-qc4" id="ffm-KJ-Gnr"/>
                             <outlet property="delegate" destination="uXG-oW-qc4" id="v0d-iW-pvL"/>
@@ -53,7 +79,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="IwH-cn-KoW">
                         <nil key="title"/>
-                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" id="7N5-ak-ynl">
+                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" id="7N5-ak-ynl">
                             <rect key="frame" x="154.5" y="7" width="66.5" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
@@ -63,6 +89,11 @@
                                 <outlet property="delegate" destination="uXG-oW-qc4" id="6b2-X2-mxg"/>
                             </connections>
                         </textField>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Wv7-oT-0Cy">
+                            <connections>
+                                <action selector="share:" destination="uXG-oW-qc4" id="9SX-4v-Z1e"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJF-YG-HpW" userLabel="First Responder" sceneMemberID="firstResponder"/>
